@@ -1,36 +1,53 @@
 import Link from 'next/link';
 import {
-  XCircle,
-  CheckCircle2,
-  Globe,
-  Lock,
-  BarChart3,
-  ArrowRight
+  ShieldCheck,
+  Zap,
+  Globe2,
+  PieChart,
+  ArrowRight,
+  LayoutDashboard,
+  Users,
+  Building2
 } from 'lucide-react';
 
 export default function LandingPage() {
   return (
-    <>
+    <div className="min-h-screen selection:bg-indigo-500/30">
       <Navbar />
       <Hero />
-      <ProblemSolution />
-      <Features />
+      <FeaturesBento />
       <HowItWorks />
       <CTA />
       <Footer />
-    </>
+    </div>
   );
 }
 
 function Navbar() {
   return (
-    <nav className="fixed top-0 w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-700 py-4">
-      <div className="container flex justify-between items-center">
-        <div className="text-2xl font-bold text-slate-50 tracking-tight">BudgetOne</div>
-        <div className="flex gap-8 items-center">
-          <Link href="#features" className="text-slate-400 hover:text-slate-50 transition-colors">Özellikler</Link>
-          <Link href="#how-it-works" className="text-slate-400 hover:text-slate-50 transition-colors">Nasıl Çalışır?</Link>
-          <Link href="/login" className="btn btn-primary">Giriş Yap</Link>
+    <nav className="fixed top-0 w-full z-[100] border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+      <div className="container-custom flex justify-between items-center py-4">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-500 to-violet-500 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">
+            B
+          </div>
+          <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
+            BudgetOne
+          </span>
+        </div>
+
+        <div className="hidden md:flex gap-8 text-sm font-medium text-slate-400">
+          <Link href="#features" className="hover:text-white transition-colors">Özellikler</Link>
+          <Link href="#how-it-works" className="hover:text-white transition-colors">Nasıl Çalışır?</Link>
+        </div>
+
+        <div className="flex gap-4">
+          <Link href="/login" className="px-5 py-2 rounded-full text-sm font-semibold text-white bg-white/10 border border-white/10 hover:bg-white/20 transition-all">
+            Giriş Yap
+          </Link>
+          <Link href="/login" className="hidden md:block btn-glow px-6 py-2 rounded-full text-sm font-bold">
+            Demo Başlat
+          </Link>
         </div>
       </div>
     </nav>
@@ -39,97 +56,113 @@ function Navbar() {
 
 function Hero() {
   return (
-    <header className="pt-32 pb-16 text-center relative overflow-hidden bg-slate-900">
-      {/* Background Glow */}
-      <div className="absolute -top-[50%] left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-blue-500/15 rounded-full blur-3xl -z-10"></div>
+    <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+      {/* Background Ambience */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-indigo-600/20 rounded-full blur-[120px] -z-10 animate-pulse"></div>
 
-      <div className="container">
-        <h1 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight text-slate-50">
-          Global Bütçenizi <br /> <span className="gradient-text">Tek Ekranda</span> Yönetin.
+      <div className="container-custom text-center relative z-10">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-950/50 border border-indigo-500/30 text-indigo-300 text-xs font-semibold mb-8 animate-fade-in-up">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+          </span>
+          v2.0 Şimdi Yayında
+        </div>
+
+        <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-tight animate-fade-in-up delay-100">
+          Global Bütçenizi <br />
+          <span className="text-gradient">Tek Ekranda</span> Yönetin
         </h1>
-        <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-10">
-          Çok lokasyonlu işletmeler için tasarlanmış, Excel kaosunu bitiren, gerçek zamanlı
-          bütçe konsolidasyon platformu.
+
+        <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 animate-fade-in-up delay-200">
+          Binlerce Excel dosyasında kaybolmayın. Çok lokasyonlu işletmeler için tasarlanmış,
+          yapay zeka destekli bütçe konsolidasyon platformu.
         </p>
 
-        <div className="flex gap-4 justify-center mb-16">
-          <Link href="/login" className="btn btn-primary btn-lg">Erken Erişim İçin Katılın</Link>
-          <Link href="/login" className="btn btn-secondary btn-lg">Demoyu İncele</Link>
+        <div className="flex flex-col md:flex-row gap-4 justify-center mb-20 animate-fade-in-up delay-300">
+          <Link href="/login" className="btn-glow px-8 py-4 rounded-full text-lg font-bold flex items-center justify-center gap-2 group">
+            Hemen Başlayın
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </Link>
+          <Link href="#features" className="px-8 py-4 rounded-full text-lg font-semibold text-white bg-slate-800 border border-slate-700 hover:bg-slate-700 transition-all">
+            Nasıl Çalışır?
+          </Link>
         </div>
 
-        {/* Abstract Dashboard Preview (Mockup) */}
-        <div className="mt-8 perspective-1000">
-          <div className="relative bg-slate-800 border border-slate-700 rounded-xl shadow-2xl max-w-4xl mx-auto overflow-hidden rotate-x-6 transform hover:rotate-0 transition-transform duration-500">
-            <div className="bg-slate-950 px-4 py-3 border-b border-slate-700 flex gap-2">
-              <span className="w-3 h-3 rounded-full bg-red-500"></span>
-              <span className="w-3 h-3 rounded-full bg-yellow-400"></span>
-              <span className="w-3 h-3 rounded-full bg-green-500"></span>
+        {/* 3D Dashboard Preview */}
+        <div className="perspective-container max-w-5xl mx-auto animate-fade-in-up delay-300">
+          <div className="relative bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl rotate-3d overflow-hidden group">
+            {/* Top Bar */}
+            <div className="bg-slate-950 px-6 py-4 border-b border-slate-800 flex items-center justify-between">
+              <div className="flex gap-2">
+                <div className="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50"></div>
+                <div className="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
+                <div className="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50"></div>
+              </div>
+              <div className="text-xs font-mono text-slate-500">budget-one-dashboard.tsx</div>
             </div>
-            <div className="p-8 grid grid-cols-2 gap-6 text-left">
-              <div className="bg-white/5 p-6 rounded-lg">
-                <span className="block text-sm text-slate-400 mb-2">Total Budget (Q1)</span>
-                <h3 className="text-3xl font-bold text-slate-50">₺450,000,000</h3>
-              </div>
-              <div className="bg-white/5 p-6 rounded-lg">
-                <span className="block text-sm text-slate-400 mb-2">Approved Locations</span>
-                <h3 className="text-3xl font-bold text-slate-50">12 / 15</h3>
-              </div>
-              <div className="col-span-2 h-24 flex items-end gap-4 mt-4">
-                <div className="flex-1 bg-slate-700 rounded-t h-[60%]"></div>
-                <div className="flex-1 bg-slate-700 rounded-t h-[80%]"></div>
-                <div className="flex-1 bg-blue-500 rounded-t h-full shadow-[0_0_20px_rgba(59,130,246,0.5)]"></div>
-                <div className="flex-1 bg-slate-700 rounded-t h-[40%]"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-  );
-}
 
-function ProblemSolution() {
-  return (
-    <section className="py-20 bg-slate-900">
-      <div className="container">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div>
-            <h2 className="text-4xl font-bold mb-4 text-slate-50">Why BudgetOne?</h2>
-            <p className="text-lg text-slate-400 mb-6">
-              Stop dealing with data lost in thousands of Excel files, erroneous versions,
-              and email traffic.
-            </p>
-            <ul className="space-y-4">
-              <li className="flex gap-3 text-slate-400 items-center"><XCircle className="text-red-500" size={20} /> Manual data merging errors</li>
-              <li className="flex gap-3 text-slate-400 items-center"><XCircle className="text-red-500" size={20} /> Outdated budget versions</li>
-              <li className="flex gap-3 text-slate-400 items-center"><XCircle className="text-red-500" size={20} /> Time loss in approval processes</li>
-            </ul>
-          </div>
-          <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-10 rounded-xl border border-slate-700">
-            <h3 className="text-2xl font-bold mb-6 text-slate-50">Our Solution</h3>
-            <ul className="space-y-6">
-              <li className="flex gap-4">
-                <CheckCircle2 className="text-teal-500 shrink-0" size={24} />
-                <div>
-                  <strong className="block text-slate-50 mb-1">Centralized Management</strong>
-                  <p className="text-slate-400">All branches enter data into a single system, in a single format.</p>
+            {/* Content Mockup */}
+            <div className="p-8 grid md:grid-cols-3 gap-6 text-left bg-slate-900/50">
+              <div className="md:col-span-2 space-y-6">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="glass-card p-6 rounded-xl">
+                    <p className="text-sm text-slate-400 mb-1">Toplam Bütçe (Q1)</p>
+                    <p className="text-3xl font-bold text-white">₺45,250,000</p>
+                    <div className="mt-4 h-1 w-full bg-slate-800 rounded-full overflow-hidden">
+                      <div className="h-full bg-indigo-500 w-[75%] rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]"></div>
+                    </div>
+                  </div>
+                  <div className="glass-card p-6 rounded-xl">
+                    <p className="text-sm text-slate-400 mb-1">Onaylanan Lokasyon</p>
+                    <p className="text-3xl font-bold text-white">12 / 15</p>
+                    <div className="flex -space-x-2 mt-3">
+                      {[1, 2, 3, 4].map(i => (
+                        <div key={i} className="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-xs text-white">
+                          MA
+                        </div>
+                      ))}
+                      <div className="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-xs text-slate-400">+8</div>
+                    </div>
+                  </div>
                 </div>
-              </li>
-              <li className="flex gap-4">
-                <CheckCircle2 className="text-teal-500 shrink-0" size={24} />
-                <div>
-                  <strong className="block text-slate-50 mb-1">Instant Consolidation</strong>
-                  <p className="text-slate-400">Data is reflected in the overall total as soon as it's entered. No waiting.</p>
+                <div className="glass-card p-6 rounded-xl h-48 flex items-end gap-2">
+                  {[40, 70, 45, 90, 60, 80, 50].map((h, i) => (
+                    <div key={i} className="flex-1 bg-gradient-to-t from-indigo-900/50 to-indigo-500/50 rounded-t hover:bg-indigo-500 transition-colors cursor-pointer relative group/bar" style={{ height: `${h}%` }}>
+                      <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-xs py-1 px-2 rounded opacity-0 group-hover/bar:opacity-100 transition-opacity whitespace-nowrap border border-slate-700">
+                        Veri: {h}%
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              </li>
-              <li className="flex gap-4">
-                <CheckCircle2 className="text-teal-500 shrink-0" size={24} />
-                <div>
-                  <strong className="block text-slate-50 mb-1">Flexible Chart of Accounts</strong>
-                  <p className="text-slate-400">Define your own chart of accounts (CoA) suitable for your corporate structure.</p>
+              </div>
+              <div className="space-y-4">
+                <div className="glass-card p-5 rounded-xl flex items-center gap-4">
+                  <div className="p-3 rounded-lg bg-emerald-500/10 text-emerald-400"><ShieldCheck size={20} /></div>
+                  <div>
+                    <p className="font-semibold text-white">Güvenli Mod</p>
+                    <p className="text-xs text-slate-400">Aktif</p>
+                  </div>
                 </div>
-              </li>
-            </ul>
+                <div className="glass-card p-5 rounded-xl flex items-center gap-4">
+                  <div className="p-3 rounded-lg bg-blue-500/10 text-blue-400"><Globe2 size={20} /></div>
+                  <div>
+                    <p className="font-semibold text-white">Senkronizasyon</p>
+                    <p className="text-xs text-slate-400">Anlık (Real-time)</p>
+                  </div>
+                </div>
+                <div className="glass-card p-5 rounded-xl flex items-center gap-4">
+                  <div className="p-3 rounded-lg bg-amber-500/10 text-amber-400"><Zap size={20} /></div>
+                  <div>
+                    <p className="font-semibold text-white">Yapay Zeka</p>
+                    <p className="text-xs text-slate-400">Analiz Hazır</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Glow overlay */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-transparent pointer-events-none"></div>
           </div>
         </div>
       </div>
@@ -137,26 +170,71 @@ function ProblemSolution() {
   );
 }
 
-function Features() {
+function FeaturesBento() {
   return (
-    <section id="features" className="py-20 bg-slate-950">
-      <div className="container">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-4xl font-bold mb-4 text-slate-50">Powerful Features</h2>
-          <p className="text-lg text-slate-400">Tools that simplify complex structures.</p>
+    <section id="features" className="py-32 relative">
+      <div className="container-custom">
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Excel Kaosuna Son Verin</h2>
+          <p className="text-lg text-slate-400">
+            Modern finans takımları için yeniden tasarlandı.
+          </p>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
-          {[
-            { icon: Globe, title: "Multi-Location", desc: "Wherever they are in the world, department managers securely upload their budgets to the system." },
-            { icon: Lock, title: "Role-Based Auth", desc: "Each user only sees and edits the areas they are responsible for. Data security is paramount." },
-            { icon: BarChart3, title: "Advanced Reporting", desc: "Instantly visualize consolidated data. Perform branch-based profitability and expense analyses." }
-          ].map((feature, idx) => (
-            <div key={idx} className="bg-slate-800 p-8 rounded-xl border border-slate-700 hover:-translate-y-1 hover:border-blue-500 transition-all duration-300">
-              <feature.icon className="w-12 h-12 text-blue-500 mb-6" />
-              <h3 className="text-xl font-bold mb-3 text-slate-50">{feature.title}</h3>
-              <p className="text-slate-400">{feature.desc}</p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Feature 1 - Large */}
+          <div className="md:col-span-2 glass-card p-8 rounded-3xl relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-10 opacity-10 group-hover:opacity-20 transition-opacity">
+              <Globe2 size={200} />
             </div>
-          ))}
+            <div className="relative z-10">
+              <div className="w-12 h-12 rounded-xl bg-indigo-500/20 flex items-center justify-center text-indigo-400 mb-6">
+                <Globe2 size={24} />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-3">Global ve Yerel Uyum</h3>
+              <p className="text-slate-400 max-w-md">
+                New York'tan İstanbul'a tüm şubeleriniz tek bir standartta birleşir.
+                Çoklu para birimi desteği ile kur farklarını otomatik yönetin.
+              </p>
+            </div>
+          </div>
+
+          {/* Feature 2 */}
+          <div className="glass-card p-8 rounded-3xl group">
+            <div className="w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center text-violet-400 mb-6">
+              <Users size={24} />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-3">Rol Bazlı Erişim</h3>
+            <p className="text-slate-400">
+              Her müdür sadece kendi sorumlu olduğu alanı görür. Veri güvenliği %100.
+            </p>
+          </div>
+
+          {/* Feature 3 */}
+          <div className="glass-card p-8 rounded-3xl group">
+            <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400 mb-6">
+              <PieChart size={24} />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-3">Anlık Konsolidasyon</h3>
+            <p className="text-slate-400">
+              Veri girildiği an tüm raporlar güncellenir. "Dosya birleştirme" derdi bitti.
+            </p>
+          </div>
+
+          {/* Feature 4 - Wide */}
+          <div className="md:col-span-2 glass-card p-8 rounded-3xl relative overflow-hidden group">
+            <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-slate-800 rounded-full border border-slate-700/50 group-hover:scale-110 transition-transform"></div>
+            <div className="relative z-10">
+              <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 mb-6">
+                <LayoutDashboard size={24} />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-3">Esnek Hesap Planı (CoA)</h3>
+              <p className="text-slate-400 max-w-lg">
+                Kurumsal yapınıza uygun hesap planını (Chart of Accounts) kolayca tanımlayın,
+                alt kırılımları yönetin ve raporlayın.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -165,31 +243,34 @@ function Features() {
 
 function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-20 bg-slate-900">
-      <div className="container">
-        <h2 className="text-3xl font-bold text-center mb-16 text-slate-50">How It Works?</h2>
-        <div className="flex flex-col md:flex-row justify-between items-start text-center relative">
-          {/* Steps would go here, simplified for brevity in migration */}
-          <div className="flex-1 px-4">
-            <div className="w-10 h-10 bg-slate-800 border border-blue-500 text-blue-500 rounded-full flex items-center justify-center font-bold mx-auto mb-6">1</div>
-            <h4 className="text-lg font-bold mb-2 text-slate-50">Define</h4>
-            <p className="text-slate-400">As an admin, create account items and branches.</p>
+    <section id="how-it-works" className="py-24 bg-slate-950 border-y border-white/5">
+      <div className="container-custom">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-12">
+          <div className="md:w-1/3">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              3 Adımda <br />
+              <span className="text-slate-400">Bütçe Sürecini Tamamla</span>
+            </h2>
+            <p className="text-slate-400 mb-8">
+              Karmaşık süreçleri basit, takip edilebilir ve onaylanabilir adımlara böldük.
+            </p>
+            <Link href="/login" className="text-indigo-400 font-semibold hover:text-indigo-300 flex items-center gap-2">
+              Hemen Başlayın <ArrowRight size={16} />
+            </Link>
           </div>
 
-          <div className="hidden md:block w-24 h-[1px] bg-slate-700 mt-5"></div>
-
-          <div className="flex-1 px-4">
-            <div className="w-10 h-10 bg-slate-800 border border-blue-500 text-blue-500 rounded-full flex items-center justify-center font-bold mx-auto mb-6">2</div>
-            <h4 className="text-lg font-bold mb-2 text-slate-50">Collect</h4>
-            <p className="text-slate-400">Managers enter the budgets they are responsible for.</p>
-          </div>
-
-          <div className="hidden md:block w-24 h-[1px] bg-slate-700 mt-5"></div>
-
-          <div className="flex-1 px-4">
-            <div className="w-10 h-10 bg-slate-800 border border-blue-500 text-blue-500 rounded-full flex items-center justify-center font-bold mx-auto mb-6">3</div>
-            <h4 className="text-lg font-bold mb-2 text-slate-50">Manage</h4>
-            <p className="text-slate-400">The system automatically consolidates all data.</p>
+          <div className="md:w-2/3 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { step: "01", title: "Tanımla", desc: "Admin hesap planını ve şubeleri oluşturur." },
+              { step: "02", title: "Topla", desc: "Müdürler sorumlu oldukları bütçeleri girer." },
+              { step: "03", title: "Yönet", desc: "Sistem tüm veriyi anlık olarak birleştirir ve raporlar." }
+            ].map((item, idx) => (
+              <div key={idx} className="bg-slate-900 border border-slate-800 p-6 rounded-2xl hover:border-indigo-500/50 transition-colors">
+                <div className="text-4xl font-black text-slate-800 mb-4">{item.step}</div>
+                <h4 className="text-xl font-bold text-white mb-2">{item.title}</h4>
+                <p className="text-slate-400 text-sm">{item.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -199,16 +280,19 @@ function HowItWorks() {
 
 function CTA() {
   return (
-    <section id="contact" className="py-20 bg-slate-900 text-center">
-      <div className="container">
-        <div className="bg-blue-500 rounded-2xl p-16 text-white max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-4">Ready to Get Rid of Excel?</h2>
-          <p className="text-blue-100 mb-8 max-w-lg mx-auto">Speed up your budget processes by 80% with BudgetOne.</p>
-          <form className="flex gap-2 max-w-md mx-auto flex-col md:flex-row">
-            <input type="email" placeholder="Your email address" required className="flex-1 px-5 py-3 rounded-lg border-none text-slate-900 focus:outline-none" />
-            <button type="submit" className="bg-slate-900 text-white px-6 py-3 rounded-lg font-bold hover:bg-slate-800 transition-colors">Notify Me</button>
-          </form>
-        </div>
+    <section className="py-32 relative overflow-hidden">
+      <div className="absolute inset-0 bg-indigo-950/20"></div>
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-indigo-600/30 rounded-full blur-[100px]"></div>
+
+      <div className="container-custom relative z-10 text-center">
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Excel Dosyalarından Kurtulun</h2>
+        <p className="text-xl text-slate-300 max-w-2xl mx-auto mb-10">
+          Bütçe süreçlerinizi %80 hızlandırın ve hatasız raporlamanın keyfini çıkarın.
+        </p>
+        <Link href="/login" className="btn-glow px-10 py-5 rounded-full text-xl font-bold inline-flex items-center gap-3">
+          Ücretsiz Deneyin <Zap className="fill-white" size={20} />
+        </Link>
+        <p className="mt-6 text-sm text-slate-500">Kredi kartı gerekmez • 14 gün ücretsiz deneme</p>
       </div>
     </section>
   );
@@ -216,9 +300,20 @@ function CTA() {
 
 function Footer() {
   return (
-    <footer className="py-8 border-t border-slate-800 bg-slate-900 text-center text-slate-400 text-sm">
-      <div className="container">
-        &copy; 2024 BudgetOne SaaS. All rights reserved.
+    <footer className="border-t border-white/10 bg-slate-950 py-12">
+      <div className="container-custom flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="flex items-center gap-2">
+          <div className="w-6 h-6 rounded bg-gradient-to-tr from-indigo-500 to-violet-500"></div>
+          <span className="font-bold text-white">BudgetOne</span>
+        </div>
+        <div className="text-slate-500 text-sm">
+          &copy; 2024 Global Budget Solution. All rights reserved.
+        </div>
+        <div className="flex gap-6 text-slate-400 text-sm">
+          <a href="#" className="hover:text-white">Gizlilik</a>
+          <a href="#" className="hover:text-white">Kullanım Şartları</a>
+          <a href="#" className="hover:text-white">İletişim</a>
+        </div>
       </div>
     </footer>
   );
