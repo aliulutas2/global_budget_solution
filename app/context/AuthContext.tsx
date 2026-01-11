@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-// import { loginUser, logoutUser, getSession } from '@/app/actions/auth'; 
+import { loginUser, logoutUser, getSession } from '@/app/actions/auth';
 
 interface User {
     id: string;
@@ -14,7 +14,7 @@ interface User {
 interface AuthContextType {
     user: User | null;
     loading: boolean;
-    login: (email: string, pass: string) => Promise<{ success: boolean; message?: string }>;
+    login: (email: string, pass: string) => Promise<{ success: boolean; message?: string; user?: User }>;
     logout: () => void;
 }
 
@@ -28,19 +28,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         // Init verify session
         const initAuth = async () => {
-            // Real implementation will go here
+            const sessionUser = await getSession();
+            if (sessionUser) setUser(sessionUser);
             setLoading(false);
         };
         initAuth();
     }, []);
 
     const login = async (email: string, pass: string) => {
-        // Placeholder for real logic
-        console.log("Login attempt", email);
-        return { success: false, message: "Database connection not yet configured" };
+        const result = await loginUser(email, pass);
+        if (result.success && result.user) {
+            setUser(result.user);
+            // Optional: Redirect based on role if needed
+            router.push('/dashboard/reports'); // Default to reports for now
+        }
+        return result;
     };
 
     const logout = async () => {
+        await logoutUser();
         setUser(null);
         router.push('/');
     };
