@@ -2,6 +2,7 @@
 
 import { prisma } from '@/lib/prisma';
 import { getSession } from './auth';
+import { Budget, Category } from '@prisma/client';
 
 export async function getCategories() {
     return await prisma.category.findMany({
@@ -90,9 +91,9 @@ export async function getConsolidatedReport() {
     const categories = await prisma.category.findMany();
 
     // Aggregate in memory
-    const report = categories.map(cat => {
-        const catEntries = budgets.filter(b => b.categoryId === cat.id);
-        const total = catEntries.reduce((sum, item) => {
+    const report = categories.map((cat: Category) => {
+        const catEntries = budgets.filter((b: Budget) => b.categoryId === cat.id);
+        const total = catEntries.reduce((sum: number, item: Budget) => {
             const rowSum = (item.monthlyAmounts as unknown as any[]).reduce((mSum: number, val: any) => mSum + Number(val), 0);
             return sum + rowSum;
         }, 0);
@@ -103,7 +104,7 @@ export async function getConsolidatedReport() {
             total_amount: total,
             entries_count: catEntries.length
         };
-    }).filter(r => r.total_amount > 0 || r.entries_count > 0);
+    }).filter((r: { total_amount: number }) => r.total_amount > 0);
 
     return report;
 }
